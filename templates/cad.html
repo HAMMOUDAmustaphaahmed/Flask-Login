@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Commande</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+  <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/logos/favicon.png') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.min.css') }}" />
+</head>
+
+<body>
+  <!-- Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+      <!-- Sidebar scroll-->
+      <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="./index.html" class="text-nowrap logo-img">
+            <img src="{{ url_for('static', filename='images/logos/dark-logo.svg') }}" width="180" alt="" />
+          </a>
+          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+            <i class="ti ti-x fs-8"></i>
+          </div>
+        </div>
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+          <ul id="sidebarnav">
+            <!-- Add your sidebar items here -->
+          </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+      </div>
+      <!-- End Sidebar scroll-->
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      
+      <!--  Header End -->
+      <h1>CAD</h1>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+    <h4>Étape 1</h4>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-{{ messages[0][0] }} alert-dismissible fade show" role="alert">
+                {{ messages[0][1] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+    {% endwith %}
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="col-md-3">
+                <label for="commande">Commande</label>
+                <input type="text" class="form-control" id="commande" name="commande" required>
+            </div>
+            <div class="col-md-3">
+                <label for="article">Article</label>
+                <input type="text" class="form-control" id="article" name="article" required>
+            </div>
+            <div class="col-md-3">
+                <label for="quantite">Quantité</label>
+                <input type="number" class="form-control" id="quantite" name="quantite">
+            </div>
+            <div class="col-md-3">
+                <label for="date_chargement">Date Chargement</label>
+                <input type="date" class="form-control" id="date_chargement" name="date_chargement">
+            </div>
+        </div>
+        <div class="form-row mt-3">
+            <div class="col-md-4">
+                <label>Type</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type" value="Uni" id="type_uni" checked>
+                    <label class="form-check-label" for="type_uni">Uni</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type" value="Rayé" id="type_raye">
+                    <label class="form-check-label" for="type_raye">Rayé</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>Phase</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="phase" value="Campionario" id="phase_campionario">
+                    <label class="form-check-label" for="phase_campionario">Campionario</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="phase" value="Production" id="phase_production" checked>
+                    <label class="form-check-label" for="phase_production">Production</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>Relaxation</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="relaxation" value="Oui" id="relaxation_oui">
+                    <label class="form-check-label" for="relaxation_oui">Oui</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="relaxation" value="Non" id="relaxation_non" checked>
+                    <label class="form-check-label" for="relaxation_non">Non</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row mt-3">
+            <div class="col-md-6">
+                <label for="fiche_matelassage">Fiche De Matelassage</label>
+                <input type="file" class="form-control" id="fiche_matelassage" name="fiche_matelassage">
+            </div>
+            <div class="col-md-6">
+                <label for="document_technique">Document Technique</label>
+                <input type="file" class="form-control" id="document_technique" name="document_technique">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Suivant</button>
+    </form>
+    </div>
+    <!--  End Body Wrapper -->
+    <script src="{{ url_for('static', filename='libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sidebarmenu.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='libs/simplebar/dist/simplebar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  </div>
+</body>
+
+</html>

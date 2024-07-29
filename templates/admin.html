@@ -8,12 +8,12 @@
 </head>
 <body>
   <div class="container">
-    <h1>Admin Dashboard</h1>
+    <h1>Dashboard</h1>
     <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
     <!-- Add User Form -->
     <div class="card mb-3">
       <div class="card-header">
-        <h2>Add New User</h2>
+        <p>Add New User</p>
       </div>
       <div class="card-body">
         <form action="{{ url_for('admin') }}" method="post">
@@ -26,10 +26,17 @@
             <input type="password" class="form-control" id="password" name="password" required>
           </div>
           <div class="mb-3">
+            <label for="matricule" class="form-label">Matricule</label>
+            <input type="text" class="form-control" id="matricule" name="matricule" required>
+          </div>
+          <div class="mb-3">
             <label for="role" class="form-label">Role</label>
             <select class="form-control" id="role" name="role" required>
               <option value="admin">Admin</option>
-              <option value="simple user">Simple User</option>
+              <option value="Opérateur">Opérateur</option>
+              <option value="cad">CAD</option>
+              <option value="UTM">UTM</option>
+              <option value="Plannification">Plannification</option>
             </select>
           </div>
           <button type="submit" class="btn btn-primary">Add User</button>
@@ -42,6 +49,7 @@
         <tr>
           <th>ID</th>
           <th>Username</th>
+          <th>Matricule</th>
           <th>Role</th>
           <th>Actions</th>
         </tr>
@@ -51,6 +59,7 @@
           <tr>
             <td>{{ user.id }}</td>
             <td>{{ user.username }}</td>
+            <td>{{ user.matricule }}</td>
             <td>{{ user.role }}</td>
             <td>
               <a href="{{ url_for('edit_user', id=user.id) }}" class="btn btn-warning">Edit</a>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Commande - Étape 2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Commande - Étape 2</h1>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+    <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Étape 3</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function toggleInputs(checkbox, className) {
+            const inputs = document.querySelectorAll(`.${className}`);
+            inputs.forEach(input => {
+                input.disabled = !checkbox.checked;
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Étape 3</h1>
+
+        <!-- ETAPE 2 -->
+        <div class="step">
+            <h3>Étape 2</h3>
+            <form method="POST" action="">
+                <div class="form-row d-flex justify-content-between">
+                    <!-- PARTIE 1 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="checkboxpartie1" value="1" id="checkboxpartie1" checked disabled>
+                                    <h5>Partie 1</h5>
+                                </div>
+                                <h5 class="mt-2">Sub 01</h5>
+                                <input type="number" name="sub_01_partie1" class="form-control" placeholder="Numéro Matelas">
+                                <h5 class="mt-2">Sub 21</h5>
+                                <input type="number" name="sub_21_partie1" class="form-control" placeholder="Numéro Matelas">
+                                <h5 class="mt-2">Sub 31</h5>
+                                <input type="number" name="sub_31_partie1" class="form-control" placeholder="Numéro Matelas">
+                                <h5 class="mt-2">Sub 51</h5>
+                                <input type="number" name="sub_51_partie1" class="form-control" placeholder="Numéro Matelas">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PARTIE 2 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="checkboxpartie3" value="1" id="checkboxpartie2" onclick="toggleInputs(this, 'form-input-2')">
+                                    <h5>Partie 2</h5>
+                                </div>
+                                <h5 class="mt-2">Sub 01</h5>
+                                <input type="number" name="sub_01_partie2" class="form-control form-input-2" placeholder="Numéro Matelas" disabled>
+                                <h5 class="mt-2">Sub 21</h5>
+                                <input type="number" name="sub_21_partie2" class="form-control form-input-2" placeholder="Numéro Matelas" disabled>
+                                <h5 class="mt-2">Sub 31</h5>
+                                <input type="number" name="sub_31_partie2" class="form-control form-input-2" placeholder="Numéro Matelas" disabled>
+                                <h5 class="mt-2">Sub 51</h5>
+                                <input type="number" name="sub_51_partie2" class="form-control form-input-2" placeholder="Numéro Matelas" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PARTIE 3 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="checkboxpartie3" value="1" id="checkboxpartie3" onclick="toggleInputs(this, 'form-input-3')">
+                                    <h5>Partie 3</h5>
+                                </div>
+                                <h5 class="mt-2">Sub 01</h5>
+                                <input type="number" name="sub_01_partie3" class="form-control form-input-3" placeholder="Numéro Matelas" disabled>
+                                <h5 class="mt-2">Sub 21</h5>
+                                <input type="number" name="sub_21_partie3" class="form-control form-input-3" placeholder="Numéro Matelas" disabled>
+                                <h5 class="mt-2">Sub 31</h5>
+                                <input type="number" name="sub_31_partie3" class="form-control form-input-3" placeholder="Numéro Matelas" disabled>
+                                <h5 class="mt-2">Sub 51</h5>
+                                <input type="number" name="sub_51_partie3" class="form-control form-input-3" placeholder="Numéro Matelas" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+    <form method="post" enctype="multipart/form-data">
+        
+        <button type="submit" class="btn btn-primary mt-3">Suivant</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

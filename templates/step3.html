@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Étape 3</title>
+  <link rel="stylesheet" href="/src/assets/css/styles.min.css">
+  <style>
+    .progress-bar {
+      position: relative;
+    }
+
+    .progress-bar span {
+      position: absolute;
+      width: 100%;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .step {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Étape 3</h1>
+    <form id="step-form" method="post" enctype="multipart/form-data">
+      <!-- Afficher les informations des étapes précédentes -->
+      <div class="form-group">
+        <label>Commande:</label>
+        <p>{{ session['commande'] }}</p>
+      </div>
+      <div class="form-group">
+        <label>Article:</label>
+        <p>{{ session['article'] }}</p>
+      </div>
+      <div class="form-group">
+        <label>Quantité:</label>
+        <p>{{ session['quantite'] }}</p>
+      </div>
+      <div class="form-group">
+        <label>Date de Chargement:</label>
+        <p>{{ session['date_chargement'] }}</p>
+      </div>
+      <div class="form-group">
+        <label>Type:</label>
+        <p>{{ session['type'] }}</p>
+      </div>
+      <div class="form-group">
+        <label>Phase:</label>
+        <p>{{ session['phase'] }}</p>
+      </div>
+      <div class="form-group">
+        <label>Relaxation:</label>
+        <p>{{ session['relaxation'] }}</p>
+      </div>
+      
+      <!-- Étape 3 - Informations supplémentaires -->
+      <div class="form-group">
+        <label>Information Y:</label>
+        <input type="text" name="information_y" class="form-control" required>
+      </div>
+      
+      <form method="post" enctype="multipart/form-data">
+        <div class="form-row mt-3">
+            <div class="col-md-6">
+                <label for="fiche_matelassage">Fiche De Matelassage</label>
+                <input type="file" class="form-control" id="fiche_matelassage" name="fiche_matelassage">
+            </div>
+            <div class="col-md-6">
+                <label for="document_technique">Document Technique</label>
+                <input type="file" class="form-control" id="document_technique" name="document_technique">
+            </div>
+        </div>
+    </form>
+
+      <button type="submit" class="btn btn-success">Enregistrer</button>
+    </form>
+  </div>
+  <script src="/src/assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="/src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/src/assets/js/app.min.js"></script>
+</body>
+
+</html>

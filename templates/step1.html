@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Commande - Étape 1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.min.css') }}" />
+    <!-- Inclure Bootstrap CSS si nécessaire pour des composants Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Commande - Étape 1</h1>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger mb-3">Logout</a>
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Formulaire de Commande</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div class="form-row">
+                    <div class="col-md-3 mb-3">
+                        <label for="commande">Commande</label>
+                        <input type="text" class="form-control" id="commande" name="commande" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="article">Article</label>
+                        <input type="text" class="form-control" id="article" name="article" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="quantite">Quantité</label>
+                        <input type="number" class="form-control" id="quantite" name="quantite">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="date_chargement">Date Chargement</label>
+                        <input type="date" class="form-control" id="date_chargement" name="date_chargement">
+                    </div>
+                </div>
+                <div class="form-row mb-3">
+                    <div class="col-md-4">
+                        <label>Type</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="type" value="Uni" id="type_uni" checked>
+                            <label class="form-check-label" for="type_uni">Uni</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="type" value="Rayé" id="type_raye">
+                            <label class="form-check-label" for="type_raye">Rayé</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Phase</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="phase" value="Campionario" id="phase_campionario">
+                            <label class="form-check-label" for="phase_campionario">Campionario</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="phase" value="Production" id="phase_production" checked>
+                            <label class="form-check-label" for="phase_production">Production</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Relaxation</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="relaxation" value="Oui" id="relaxation_oui">
+                            <label class="form-check-label" for="relaxation_oui">Oui</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="relaxation" value="Non" id="relaxation_non" checked>
+                            <label class="form-check-label" for="relaxation_non">Non</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Suivant</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts JS de Bootstrap si nécessaires -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
