@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #8fb692; /* Background color */
+            color: #fff; /* Text color */
+            padding: 20px;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #4d4d4d;
+            padding: 10px 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            max-width: 100px;
+            border-radius: 10px;
+        }
+
+        .navbar-title {
+            margin: 0;
+            flex: 1;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-edit {
+            background-color: #007bff;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-edit:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background-color: #1a1a1a;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+        a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="https://static.flashintel.ai/image/6/f/7/6f7c46e1bc55b15519f8a5925424f863.jpeg" alt="Logo" class="logo">
+        <h1 class="navbar-title">Dashboard</h1>
+        <div>
+            <a href="{{ url_for('add_user') }}" class="btn">Add User</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-warning">Logout</a>
+        </div>
+    </nav>
+
+    <h1>Users</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Matricule</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.matricule }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <a href="{{ url_for('edit_user', id=user.id) }}" class="btn btn-edit">Edit</a>
+                    <a href="{{ url_for('delete_user', id=user.id) }}" class="btn btn-delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Orders</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Commande</th>
+                <th>Article</th>
+                <th>Date Chargement</th>
+                <th>Type</th>
+                <th>Phase</th>
+                <th>Relaxation</th>
+                <th>Fiche Matelassage</th>
+                <th>Document Technique</th>
+                <th>Parties</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.commande }}</td>
+                <td>{{ order.article }}</td>
+                <td>{{ order.date_chargement }}</td>
+                <td>{{ order.type }}</td>
+                <td>{{ order.phase }}</td>
+                <td>{{ order.relaxation }}</td>
+                <td><a href="{{ url_for('static', filename=order.fiche_matelassage) }}">Download</a></td>
+                <td><a href="{{ url_for('static', filename=order.document_technique) }}">Download</a></td>
+                <td>
+                    <ul>
+                        {% for party in order.parties %}
+                        <li>
+                            {{ party.partie_name }}
+                            <ul>
+                                {% for sub in party.subs %}
+                                <li>
+                                    {{ sub.sub_name }}
+                                    <ul>
+                                        <li>Temps Relaxation: {{ sub.temps.temps_relaxation }}</li>
+                                        <li>Temps Matelassage: {{ sub.temps.temps_matelassage }}</li>
+                                        <li>Temps Coupr: {{ sub.temps.temps_coupr }}</li>
+                                        <li>Temps Etiquetage: {{ sub.temps.temps_etiquetage }}</li>
+                                        <ul>
+                                            {% for matelas in sub.matelas %}
+                                            <li>
+                                                Longueur: {{ matelas.longueur }},
+                                                Quantité: {{ matelas.quantite }},
+                                                État: {{ matelas.etat }}
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </ul>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

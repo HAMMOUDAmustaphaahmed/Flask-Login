@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Page 404 Styling */
+        body, html {
+            height: 100%;
+            font-family: 'Arvo', serif;
+        }
+
+        .page_404 {
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif') no-repeat center center;
+            background-size: cover;
+        }
+
+        .contant_box_404 {
+            text-align: center;
+            color: #000000;
+            
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .contant_box_404 h1 {
+            font-size: 80px;
+            margin: 0;
+        }
+
+        .contant_box_404 h3 {
+            font-size: 40px;
+            margin: 20px 0;
+        }
+
+        .contant_box_404 p {
+            font-size: 20px;
+            margin: 10px 0 20px;
+        }
+
+        .link_404 {
+            color: #fff;
+            background: #5a7e57;
+            position: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 18px;
+            transition: background 0.3s ease;
+        }
+
+        .link_404:hover {
+            background: #2a7d2a;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contant_box_404 h1 {
+                font-size: 60px;
+            }
+
+            .contant_box_404 h3 {
+                font-size: 30px;
+            }
+
+            .contant_box_404 p {
+                font-size: 18px;
+            }
+
+            .link_404 {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contant_box_404 h1 {
+                font-size: 40px;
+            }
+
+            .contant_box_404 h3 {
+                font-size: 25px;
+            }
+
+            .contant_box_404 p {
+                font-size: 16px;
+            }
+
+            .link_404 {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="page_404">
+        <div class="contant_box_404">
+            
+            
+            
+            <a href="{{ url_for('login') }}" class="link_404">Go to Home</a>
+        </div>
+    </section>
+</body>
+</html>

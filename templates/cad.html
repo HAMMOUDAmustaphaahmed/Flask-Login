@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer Commande</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #8fb692; /* Black background */
+            color: #fff; /* White text */
+            padding: 20px;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #4d4d4d;
+            padding: 10px 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Space out elements */
+        }
+
+        .logo {
+            max-width: 100px;
+            border-radius: 10px;
+        }
+
+        .navbar-title {
+            margin: 0;
+            flex: 1; /* Takes up available space */
+            text-align: center; /* Center the title */
+        }
+
+        .btn {
+            background-color: #28a745; /* Green background */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .btn-warning {
+            background-color: #ffc107; /* Yellow background for the logout button */
+        }
+
+        .btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800; /* Darker yellow on hover */
+        }
+
+        /* Edit and Delete Button Styles */
+        .btn-edit {
+            background-color: #007bff; /* Blue background for edit */
+        }
+
+        .btn-delete {
+            background-color: #dc3545; /* Red background for delete */
+        }
+
+        .btn-edit:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+
+        /* Form Styling */
+        form {
+            background-color: #3a9174;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #333;
+            border-radius: 4px;
+        }
+
+        input[type="submit"],
+        button[type="button"] {
+            background-color: #28a745; /* Green background */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button[type="button"] {
+            background-color: #007bff; /* Blue background for add button */
+        }
+
+        input[type="submit"]:hover,
+        button[type="button"]:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        button[type="button"] {
+            margin-top: 10px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background-color: #6a927e;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #333;
+            text-align: center; /* Center text in table cells */
+        }
+
+        th {
+            background-color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+        /* Link Styling */
+        a {
+            color: #28a745; /* Green color */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="https://static.flashintel.ai/image/6/f/7/6f7c46e1bc55b15519f8a5925424f863.jpeg" alt="Logo" class="logo">
+        <h1 class="navbar-title">Dashboard</h1>
+        <div>
+           
+            <a href="{{ url_for('logout') }}" class="btn btn-warning">Logout</a>
+        </div>
+    </nav>
+
+    <h1>Créer une Commande</h1>
+    <form method="post" enctype="multipart/form-data">
+        <label for="article">Article:</label>
+        <input type="text" id="article" name="article" required><br>
+
+        <label for="commande">Commande:</label>
+        <input type="text" id="commande" name="commande" required><br>
+
+        <label for="date_chargement">Date de Chargement:</label>
+        <input type="date" id="date_chargement" name="date_chargement" required><br>
+
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" required><br>
+
+        <label for="phase">Phase:</label>
+        <input type="text" id="phase" name="phase"><br>
+
+        <label for="relaxation">Relaxation:</label>
+        <input type="text" id="relaxation" name="relaxation" required><br>
+
+        <label for="fiche_matelassage">Fiche de Matelassage:</label>
+        <input type="file" id="fiche_matelassage" name="fiche_matelassage"><br>
+
+        <label for="document_technique">Document Technique:</label>
+        <input type="file" id="document_technique" name="document_technique"><br>
+
+        <label for="nombre_de_parties">Nombre de Parties:</label>
+        <input type="number" id="nombre_de_parties" name="nombre_de_parties" required><br>
+
+        <div id="parties-container">
+            <!-- Parties and subs fields will be added here dynamically -->
+        </div>
+
+        <button type="button" onclick="addParties()">Ajouter Parties</button><br>
+
+        <input type="submit" value="Ajouter Commande">
+    </form>
+
+    <script>
+        function addParties() {
+            const numParties = parseInt(document.getElementById('nombre_de_parties').value);
+            const container = document.getElementById('parties-container');
+            container.innerHTML = '';
+
+            for (let i = 0; i < numParties; i++) {
+                const partyDiv = document.createElement('div');
+                partyDiv.innerHTML = `
+                    <h3>Partie ${i + 1}</h3>
+                    <label for="partie_nom_${i}">Nom Partie:</label>
+                    <input type="text" id="partie_nom_${i}" name="partie_nom_${i}" required><br>
+
+                    <label for="nombre_de_sub_${i}">Nombre de Sous-Parties:</label>
+                    <input type="number" id="nombre_de_sub_${i}" name="nombre_de_sub_${i}" required><br>
+
+                    <div id="subs-container-${i}">
+                        <!-- Subs fields will be added here dynamically -->
+                    </div>
+
+                    <button type="button" onclick="addSubs(${i})">Ajouter Sous-Parties</button><br>
+                `;
+                container.appendChild(partyDiv);
+            }
+        }
+
+        function addSubs(partyIndex) {
+            const numSubs = parseInt(document.getElementById(`nombre_de_sub_${partyIndex}`).value);
+            const container = document.getElementById(`subs-container-${partyIndex}`);
+            container.innerHTML = '';
+
+            for (let j = 0; j < numSubs; j++) {
+                const subDiv = document.createElement('div');
+                subDiv.innerHTML = `
+                    <h4>Sous-Partie ${j + 1}</h4>
+                    <label for="sub_nom_${partyIndex}_${j}">Nom Sous-Partie:</label>
+                    <input type="text" id="sub_nom_${partyIndex}_${j}" name="sub_nom_${partyIndex}_${j}" required><br>
+
+                    <label for="temps_relaxation_${partyIndex}_${j}">Temps Relaxation:</label>
+                    <input type="text" id="temps_relaxation_${partyIndex}_${j}" name="temps_relaxation_${partyIndex}_${j}"><br>
+
+                    <label for="temps_matelassage_${partyIndex}_${j}">Temps Matelassage:</label>
+                    <input type="text" id="temps_matelassage_${partyIndex}_${j}" name="temps_matelassage_${partyIndex}_${j}"><br>
+
+                    <label for="temps_coupr_${partyIndex}_${j}">Temps Coupr:</label>
+                    <input type="text" id="temps_coupr_${partyIndex}_${j}" name="temps_coupr_${partyIndex}_${j}"><br>
+
+                    <label for="temps_etiquetage_${partyIndex}_${j}">Temps Etiquetage:</label>
+                    <input type="text" id="temps_etiquetage_${partyIndex}_${j}" name="temps_etiquetage_${partyIndex}_${j}"><br>
+
+                    <label for="nombre_de_matelas_${partyIndex}_${j}">Nombre de Matelas:</label>
+                    <input type="number" id="nombre_de_matelas_${partyIndex}_${j}" name="nombre_de_matelas_${partyIndex}_${j}" required><br>
+
+                    <div id="matelas-container-${partyIndex}_${j}">
+                        <!-- Matelas fields will be added here dynamically -->
+                    </div>
+
+                    <button type="button" onclick="addMatelas(${partyIndex}, ${j})">Ajouter Matelas</button><br>
+                `;
+                container.appendChild(subDiv);
+            }
+        }
+
+        function addMatelas(partyIndex, subIndex) {
+            const numMatelas = parseInt(document.getElementById(`nombre_de_matelas_${partyIndex}_${subIndex}`).value);
+            const container = document.getElementById(`matelas-container-${partyIndex}_${subIndex}`);
+            container.innerHTML = '';
+
+            for (let k = 0; k < numMatelas; k++) {
+                const matelasDiv = document.createElement('div');
+                matelasDiv.innerHTML = `
+                    <h5>Matelas ${k + 1}</h5>
+                    <label for="longueur_${partyIndex}_${subIndex}_${k}">Longueur:</label>
+                    <input type="text" id="longueur_${partyIndex}_${subIndex}_${k}" name="longueur_${partyIndex}_${subIndex}_${k}"><br>
+
+                    <label for="quantite_${partyIndex}_${subIndex}_${k}">Quantité:</label>
+                    <input type="number" id="quantite_${partyIndex}_${subIndex}_${k}" name="quantite_${partyIndex}_${subIndex}_${k}"><br>
+
+                    <label for="etat_${partyIndex}_${subIndex}_${k}">État:</label>
+                    <select id="etat_${partyIndex}_${subIndex}_${k}" name="etat_${partyIndex}_${subIndex}_${k}">
+                        <option value="en cours">En cours</option>
+                        <option value="bloqué">Bloqué</option>
+                        <option value="annulé">Annulé</option>
+                        <option value="en prévision">En prévision</option>
+                    </select><br>
+                `;
+                container.appendChild(matelasDiv);
+            }
+        }
+    </script>
+</body>
+</html>
